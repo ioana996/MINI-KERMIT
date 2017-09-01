@@ -1,0 +1,22 @@
+Stroinea Ioana, 325CC
+Tema1 - PC
+.....................
+
+Pentru pachetul initial send-init am creat o structura ce are un singur
+camp, un sir in care retin datele din enunt. Dupa aceea, copiez acest
+tip de pachet in frame, calculez crc, apoi il copiez in t.payload si
+il trimit. Verificam daca mesajul primit este diferit de null. In
+acest caz, il copiem intr-o structura de tip frame si verificam daca
+mesajul este de aprobare sau nu.In caz pozitiv, transmitem secventa 
+urmatoare(incrementam numarul ei) altfel retransmitem ultima secventa.
+In cazul in care pachetul send-init a ajuns la receptor, incepem
+transmisia pentru fiecare fisier dat ca argument. Toate pachetele
+respecta acelasi model: copiem datele de trimis in structura, aceasta
+va ajunge in t.payload si se va transmite catre receptor. Sender-ul nu
+trimite alt mesaj pana nu primeste un mesaj de confirmare.
+
+In receiver, copiez datele primite intr-un frame, apoi calculez crc
+pentru datele primite si il compar cu cel primit. Daca sunt diferite
+trimit un mesaj NACK altfel unul ACK. In cazul in care primesc un pachet
+Date, cand crc corespunde cu cel primit, mai scriu si datele in fisier
+inainte de trimiterea ACK.
